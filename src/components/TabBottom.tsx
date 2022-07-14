@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {Icon} from 'react-native-ui-lib';
 import colors from 'utils/colors';
 import {getHeight, getWidth} from 'utils/configScreen';
 
@@ -52,7 +53,7 @@ function TabBottom({state, descriptors, navigation}) {
         onPress={onPress}
         onLongPress={onLongPress}
         style={[styles?.buttonItem]}>
-        <Image source={icons[`icon${route.name}`]} style={iconStyle} />
+        <Icon size={20} assetGroup="icons" style={iconStyle} assetName={} />
       </TouchableOpacity>
     );
   };

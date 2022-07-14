@@ -1,5 +1,5 @@
 import {TabBottom} from 'app/NavigationComponent';
-
+import React from 'react';
 import {Home, Shop, Favorites} from 'screens/index';
 
 const tabs = [

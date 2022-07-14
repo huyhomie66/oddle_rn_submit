@@ -1,11 +1,18 @@
-import { Assets, Colors, Typography, Spacings, Incubator, ViewProps } from 'react-native-ui-lib'; // eslint-disable-line
-import { ThemeManager } from 'react-native-ui-lib';
-import { Dimensions } from 'react-native';
+import {
+  Assets,
+  Colors,
+  Typography,
+  Spacings,
+  Incubator,
+  ViewProps,
+} from 'react-native-ui-lib'; // eslint-disable-line
+import {ThemeManager} from 'react-native-ui-lib';
+import {Dimensions} from 'react-native';
 import colors from 'utils/colors';
 
-export const { width, height } = Dimensions.get('window');
+export const {width, height} = Dimensions.get('window');
 
-const getJustify = (props) => {
+const getJustify = props => {
   if (props.around) {
     return 'space-around';
   } else if (props.between) {
@@ -18,8 +25,8 @@ interface IView extends ViewProps {
   between: boolean;
 }
 
-const loadDemoConfigurations = () => {
-  ThemeManager.setComponentTheme('Text', (props) => {
+const loadTheme = () => {
+  ThemeManager.setComponentTheme('Text', props => {
     return {
       color: colors.main,
       fontWeight: props.bold && 'bold',
@@ -39,39 +46,22 @@ const loadDemoConfigurations = () => {
   });
 
   Assets.loadAssetsGroup('icons', {
-    'arrow-right': require('../assets/arrow-right.png'),
-    eye: require('../assets/eye.png'),
-    'eye-slash': require('../assets/eye-slash.png'),
-    maximize: require('../assets/maximize.png'),
-    closeSquare: require('../assets/close-square.png'),
-    clock: require('../assets/clock.png'),
-    close: require('../assets/close.png'),
-    logout: require('../assets/logout.png'),
-    share: require('../assets/share.png'),
-    trending: require('../assets/trending.png'),
-    bestValue: require('../assets/best-value.png'),
-    camera: require('../assets/camera.png'),
-    info: require('../assets/info.png'),
-    lock: require('../assets/lock.png'),
-    network: require('../assets/network.png'),
-    ring: require('../assets/ring.png'),
-    user: require('../assets/user.png'),
+    home: require('../assets/home.svg'),
+    'home-selected': require('../assets/home-selected.svg'),
+    shop: require('../app/shop.svg'),
+    'shop-selected': require('../app/shop-selected.svg'),
+    favorite: require('../assets/favorite.svg'),
+    'favorite-selected': require('../assets/favorite-selected.svg'),
   });
 
-  Assets.loadAssetsGroup('images', {
-    user: require('../assets/user-default.png'),
-    'price-list': require('../assets/price-list.png'),
-    'coin-intro': require('../assets/coin-intro.png'),
-    noResultSearch: require('../assets/no-result-search.png'),
-    noNewNotification: require('../assets/no-new-notification.png'),
-  });
+  Assets.loadAssetsGroup('images', {});
 
   Assets.loadAssetsGroup('svg', {});
 
   Typography.loadTypographies({
-    h1: { ...Typography.text40 },
-    h2: { ...Typography.text50 },
-    h3: { ...Typography.text70M },
+    h1: {...Typography.text40},
+    h2: {...Typography.text50},
+    h3: {...Typography.text70M},
     body: Typography.text70,
     bodySmall: Typography.text80,
   });
@@ -106,7 +96,10 @@ const loadDemoConfigurations = () => {
   Colors.loadColors(colors);
 
   /* Components */
-  Incubator.TextField.defaultProps = { ...Incubator.TextField.defaultProps, preset: 'default' };
+  Incubator.TextField.defaultProps = {
+    ...Incubator.TextField.defaultProps,
+    preset: 'default',
+  };
 };
 
-export default loadDemoConfigurations;
+export default loadTheme;
