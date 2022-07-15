@@ -5,7 +5,7 @@ import {Home, Shop, Favorites} from 'screens/index';
 const tabs = [
   {name: 'Home', component: Home},
   {name: 'Shop', component: Shop},
-  {name: 'Favorites', component: Favorites},
+  {name: 'Favorite', component: Favorites},
 ];
 
 const MainBottomTab = () => <TabBottom tabs={tabs} />;

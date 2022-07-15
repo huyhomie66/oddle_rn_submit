@@ -46,12 +46,12 @@ const loadTheme = () => {
   });
 
   Assets.loadAssetsGroup('icons', {
-    home: require('../assets/home.svg'),
-    'home-selected': require('../assets/home-selected.svg'),
-    shop: require('../app/shop.svg'),
-    'shop-selected': require('../app/shop-selected.svg'),
-    favorite: require('../assets/favorite.svg'),
-    'favorite-selected': require('../assets/favorite-selected.svg'),
+    home: require('../assets/home.png'),
+    'home-selected': require('../assets/home-selected.png'),
+    shop: require('../assets/shop.png'),
+    'shop-selected': require('../assets/shop-selected.png'),
+    favorite: require('../assets/favorite.png'),
+    'favorite-selected': require('../assets/favorite-selected.png'),
   });
 
   Assets.loadAssetsGroup('images', {});
