@@ -2,9 +2,13 @@ import {Appearance} from 'react-native';
 const colorScheme = Appearance.getColorScheme();
 
 export default {
-  primary: '#2873FF',
+  primary: '#1C0056',
+  violet: '#F3EFFF',
+  greenTint: '#F7FDFF',
   smoke: '#F8FAFC',
-  gray: '#D8DDE3',
+  darkGray: '#BBBBBB',
+  gray: '#E5E5E5',
+  lightGray: '#F1F1F1',
   green: '#22C36B',
   ashGrey: '#64748B',
   greyTint: '#8E9BAE',
@@ -14,7 +18,4 @@ export default {
   white: 'white',
   main: colorScheme === 'dark' ? '#000000' : '#000000',
   transparent: 'transparent',
-  redTint: 'rgb(255, 0, 0, 0.6)',
-  greenTint: 'rgba(34, 195, 107, 0.6)',
-  shadowColor: 'rgba(1, 31, 54, 0.1)',
 };

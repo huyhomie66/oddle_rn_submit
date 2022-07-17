@@ -5,6 +5,7 @@ import {
   Spacings,
   Incubator,
   ViewProps,
+  View,
 } from 'react-native-ui-lib'; // eslint-disable-line
 import {ThemeManager} from 'react-native-ui-lib';
 import {Dimensions} from 'react-native';
@@ -20,6 +21,14 @@ const getJustify = props => {
   }
 };
 
+const globalTag = {
+  h1: {fontSize: 20, lineHeight: 34, fontWeight: '700'},
+  h2: {fontSize: 24, lineHeight: 32},
+  h3: {fontSize: 20, lineHeight: 26},
+  h4: {fontSize: 18, lineHeight: 24},
+  body: {fontSize: 16, lineHeight: 20},
+  bodySmall: {fontSize: 14, lineHeight: 20},
+};
 interface IView extends ViewProps {
   around: boolean;
   between: boolean;
@@ -29,7 +38,7 @@ const loadTheme = () => {
   ThemeManager.setComponentTheme('Text', props => {
     return {
       color: colors.main,
-      fontWeight: props.bold && 'bold',
+      fontWeight: props.bold ? 'bold' : '400',
     };
   });
 
@@ -52,19 +61,16 @@ const loadTheme = () => {
     'shop-selected': require('../assets/shop-selected.png'),
     favorite: require('../assets/favorite.png'),
     'favorite-selected': require('../assets/favorite-selected.png'),
+    info: require('../assets/info.png'),
+    money: require('../assets/money.png'),
+    star: require('../assets/star.png'),
   });
 
   Assets.loadAssetsGroup('images', {});
 
   Assets.loadAssetsGroup('svg', {});
 
-  Typography.loadTypographies({
-    h1: {...Typography.text40},
-    h2: {...Typography.text50},
-    h3: {...Typography.text70M},
-    body: Typography.text70,
-    bodySmall: Typography.text80,
-  });
+  Typography.loadTypographies(globalTag);
 
   Spacings.loadSpacings({
     s12: Spacings.s10 + Spacings.s2,
@@ -80,11 +86,6 @@ const loadTheme = () => {
       mountainBackground: Colors.green50,
     },
     dark: {
-      // screenBG: Colors.grey10,
-      // textColor: Colors.white,
-      // moonOrSun: Colors.grey80,
-      // mountainForeground: Colors.violet10,
-      // mountainBackground: Colors.violet20,
       screenBG: Colors.white,
       textColor: Colors.grey10,
       moonOrSun: Colors.yellow30,
