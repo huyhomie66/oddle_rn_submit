@@ -5,7 +5,7 @@ module.exports = {
   get Shop() {
     return require('./Shop').default;
   },
-  get Favorites() {
-    return require('./Favorites').default;
+  get Favorite() {
+    return require('./Favorite').default;
   },
 };

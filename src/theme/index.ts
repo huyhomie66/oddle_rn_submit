@@ -22,9 +22,10 @@ const getJustify = props => {
 };
 
 const globalTag = {
-  h1: {fontSize: 20, lineHeight: 34, fontWeight: '700'},
+  h1: {fontSize: 26, lineHeight: 34, fontWeight: '700'},
   h2: {fontSize: 24, lineHeight: 32},
   h3: {fontSize: 20, lineHeight: 26},
+  h3Bold: {fontSize: 20, lineHeight: 26, fontWeight: '700'},
   h4: {fontSize: 18, lineHeight: 24},
   body: {fontSize: 16, lineHeight: 20},
   bodySmall: {fontSize: 14, lineHeight: 20},

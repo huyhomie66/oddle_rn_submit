@@ -193,7 +193,9 @@ const styles = StyleSheet.create({
   cardImage: {
     height: getHeight(200),
     zIndex: -1,
-    borderRadius: BORDER_RADIUS,
+    borderTopEndRadius: BORDER_RADIUS,
+    borderTopLeftRadius: BORDER_RADIUS,
+    backgroundColor: colors.gray,
   },
   button: {borderWidth: 1, borderColor: colors.darkGray, width: getWidth(120)},
   categoryBlock: {justifyContent: 'space-between', paddingBottom: spacing(1)},

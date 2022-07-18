@@ -27,7 +27,7 @@ const HomeHeader = ({id = '', image_link}: IHeader) => {
       <Image source={{uri: image_link}} style={styles.image} />
       <View>
         <Text bodySmall>Good morning!</Text>
-        <Text h1>{id}</Text>
+        <Text h3Bold>{id}</Text>
       </View>
     </View>
   );
@@ -57,7 +57,30 @@ const ShopHeader = ({id = '', image_link, ...props}: IHeader) => {
   );
 };
 
-export default {HomeHeader, ShopHeader};
+const FavoriteHeader = ({id = '', image_link, ...props}: IHeader) => {
+  const insets = useSafeAreaInsets();
+  const viewProps = {
+    row: true,
+    centerV: true,
+    between: true,
+    width: '80%',
+    style: {
+      paddingTop: insets.top,
+      ...styles.favoriteHeader,
+    },
+    ...props,
+  };
+
+  return (
+    <View {...viewProps}>
+      <Text h1>Favorite</Text>
+      <Image source={{uri: image_link}} style={styles.image} />
+    </View>
+  );
+};
+
+export default {HomeHeader, ShopHeader, FavoriteHeader};
+
 const styles = StyleSheet.create({
   shopHeader: {
     width: '100%',
@@ -72,13 +95,16 @@ const styles = StyleSheet.create({
     shadowRadius: 2.22,
 
     elevation: 3,
-
     // ...genBoxShadow(5),
   },
+  favoriteHeader: {
+    width: '100%',
+    paddingHorizontal: spacing(4),
+  },
   image: {
-    height: getHeight(60),
-    width: getWidth(60),
-    borderRadius: 30,
+    height: getHeight(50),
+    width: getWidth(50),
+    borderRadius: 25,
     marginRight: spacing(2.5),
   },
 });

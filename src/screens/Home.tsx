@@ -7,7 +7,6 @@ import {HorizontalScroll, ShoppingCard, Header} from 'components';
 
 import {spacing} from 'utils/configScreen';
 import colors from 'utils/colors';
-import {height} from 'theme';
 
 export default () => {
   return (
@@ -17,7 +16,9 @@ export default () => {
           image_link="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png"
           id="d50aeb3c-7342-4675-b836-b4f9867eebb4"
         />
-        <Text h1>Recommended for you</Text>
+        <Text h3Bold style={{paddingTop: spacing(2)}}>
+          Recommended for you
+        </Text>
       </View>
       <ScrollView
         contentContainerStyle={styles.body}
