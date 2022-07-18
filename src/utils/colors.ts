@@ -19,3 +19,17 @@ export default {
   main: colorScheme === 'dark' ? '#000000' : '#000000',
   transparent: 'transparent',
 };
+
+const genBoxShadow = (elevation: number) => ({
+  shadowColor: '#000',
+  shadowOffset: {
+    width: 0,
+    height: elevation * 0.5,
+  },
+  shadowOpacity: 12.7 * elevation,
+  shadowRadius: 1.55 * elevation,
+
+  elevation,
+});
+
+export {genBoxShadow};

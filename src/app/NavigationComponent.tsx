@@ -1,6 +1,9 @@
 // import {Navigation} from 'react-native-navigation';
 import React from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {
+  createBottomTabNavigator,
+  BottomTabBarProps,
+} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import TabBottomComponent from 'components/TabBottom';
@@ -22,7 +25,7 @@ const TabBottom = ({tabs}: {tabs: ITab[]}) => {
 
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="Shop"
       screenOptions={{headerShown: false}}
       tabBar={props => <TabBottomComponent {...props} />}>
       {tabs.map((e, i) => (

@@ -1,23 +1,27 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, StatusBar, StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet} from 'react-native';
 import {View, Text} from 'react-native-ui-lib';
-import HorizontalScroll from 'components/HorizontalScroll';
-import ShoppingCard from 'components/ShoppingCard';
-import Header from 'components/Header';
+import {SafeAreaView} from 'react-native-safe-area-context';
+
+import {HorizontalScroll, ShoppingCard, Header} from 'components';
+
 import {spacing} from 'utils/configScreen';
 import colors from 'utils/colors';
+import {height} from 'theme';
 
 export default () => {
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['left', 'right']}>
       <View style={styles.header}>
-        <Header
+        <Header.HomeHeader
           image_link="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png"
           id="d50aeb3c-7342-4675-b836-b4f9867eebb4"
         />
         <Text h1>Recommended for you</Text>
       </View>
-      <ScrollView style={styles.body} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        contentContainerStyle={styles.body}
+        showsVerticalScrollIndicator={false}>
         <HorizontalScroll style={styles.horizontalScroll}>
           <ShoppingCard
             style={styles.card}
@@ -80,11 +84,11 @@ const styles = StyleSheet.create({
   card: {marginHorizontal: spacing(2), marginVertical: spacing(4)},
   header: {padding: spacing(4), backgroundColor: colors.violet},
   body: {
-    paddingBottom: spacing(20),
     backgroundColor: colors.white,
+    paddingBottom: spacing(5),
   },
   container: {
     flex: 1,
-    backgroundColor: colors.violet,
+    backgroundColor: colors.white,
   },
 });

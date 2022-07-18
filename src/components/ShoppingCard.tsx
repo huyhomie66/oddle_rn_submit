@@ -3,7 +3,7 @@ import {Pressable, StyleSheet} from 'react-native';
 import {Card, Text, View, Icon, Image, CardProps} from 'react-native-ui-lib';
 
 import Button from 'components/Button';
-import colors from 'utils/colors';
+import colors, {genBoxShadow} from 'utils/colors';
 import {getHeight, getWidth, spacing} from 'utils/configScreen';
 
 export interface ShoppingCardProps extends CardProps {
@@ -176,7 +176,10 @@ const styles = StyleSheet.create({
     paddingTop: spacing(5),
     paddingHorizontal: spacing(4),
   },
-  card: {backgroundColor: colors.gray, borderRadius: BORDER_RADIUS},
+  card: {
+    backgroundColor: colors.gray,
+    borderRadius: BORDER_RADIUS,
+  },
 
   favoriteButton: {
     height: spacing(8),
@@ -185,15 +188,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
-
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 1,
+    ...genBoxShadow(1),
   },
   cardImage: {
     height: getHeight(200),
