@@ -7,10 +7,10 @@ import {getHeight, getWidth, spacing} from 'utils/configScreen';
 
 interface IHeader extends ViewProps {
   id: string;
-  image_link: string;
+  imageLink: string;
 }
 
-const HomeHeader = ({id = '', image_link}: IHeader) => {
+const HomeHeader = ({id = '', imageLink}: IHeader) => {
   const insets = useSafeAreaInsets();
 
   const viewProps = {
@@ -24,7 +24,7 @@ const HomeHeader = ({id = '', image_link}: IHeader) => {
 
   return (
     <View {...viewProps}>
-      <Image source={{uri: image_link}} style={styles.image} />
+      <Image source={{uri: imageLink}} style={styles.image} />
       <View>
         <Text bodySmall>Good morning!</Text>
         <Text h3Bold>{id}</Text>
@@ -33,7 +33,7 @@ const HomeHeader = ({id = '', image_link}: IHeader) => {
   );
 };
 
-const ShopHeader = ({id = '', image_link, ...props}: IHeader) => {
+const ShopHeader = ({id = '', imageLink, ...props}: IHeader) => {
   const insets = useSafeAreaInsets();
   const viewProps = {
     row: true,
@@ -48,7 +48,7 @@ const ShopHeader = ({id = '', image_link, ...props}: IHeader) => {
 
   return (
     <View {...viewProps}>
-      <Image source={{uri: image_link}} style={styles.image} />
+      <Image source={{uri: imageLink}} style={styles.image} />
       <View>
         <Text bodySmall>Good morning!</Text>
         <Text h1>{id}</Text>
@@ -57,7 +57,7 @@ const ShopHeader = ({id = '', image_link, ...props}: IHeader) => {
   );
 };
 
-const FavoriteHeader = ({id = '', image_link, ...props}: IHeader) => {
+const FavoriteHeader = ({id = '', imageLink, ...props}: IHeader) => {
   const insets = useSafeAreaInsets();
   const viewProps = {
     row: true,
@@ -74,7 +74,7 @@ const FavoriteHeader = ({id = '', image_link, ...props}: IHeader) => {
   return (
     <View {...viewProps}>
       <Text h1>Favorite</Text>
-      <Image source={{uri: image_link}} style={styles.image} />
+      <Image source={{uri: imageLink}} style={styles.image} />
     </View>
   );
 };

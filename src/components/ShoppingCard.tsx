@@ -7,7 +7,7 @@ import colors, {genBoxShadow} from 'utils/colors';
 import {getHeight, getWidth, spacing} from 'utils/configScreen';
 
 export interface ShoppingCardProps extends CardProps {
-  image_link: string;
+  imageLink: string;
   brand: string;
   tagList: string[];
   rating: string;
@@ -27,7 +27,7 @@ const BORDER_RADIUS = 12;
 
 const RatingBlock = ({data}: {data: CategoryData[]}) => {
   return (
-    <View row width={getWidth(110)} style={styles.categoryBlock}>
+    <View row width={getWidth(88)} style={styles.categoryBlock}>
       {data.map((c, i) => (
         <View row centerV key={i}>
           {c.icon ? (
@@ -43,7 +43,7 @@ const RatingBlock = ({data}: {data: CategoryData[]}) => {
 };
 
 export default ({
-  image_link = '',
+  imageLink = '',
   name,
   price,
   rating,
@@ -66,7 +66,11 @@ export default ({
 
   const tagListBlock = (
     <View row paddingB-10>
-      {tagList.length > 0 && <Text bodySmall>{tagList.toString()}</Text>}
+      {tagList.length > 0 && (
+        <Text bodySmall numberOfLines={1}>
+          {tagList.toString()}
+        </Text>
+      )}
     </View>
   );
 
@@ -102,7 +106,11 @@ export default ({
     return (
       <View>
         {cardHeader}
-        <Image style={styles.cardImage} source={{uri: image_link}} />
+        <Image
+          style={styles.cardImage}
+          source={{uri: imageLink}}
+          resizeMode="cover"
+        />
       </View>
     );
   };
@@ -125,24 +133,26 @@ export default ({
   );
 
   const categoryBlock = (
-    <View row width={getWidth(110)} style={styles.categoryBlock}>
+    <View row style={styles.categoryBlock}>
       <View row centerV>
         <Icon assetGroup="icons" assetName={'info'} style={styles.icon} />
-        <Text bodySmall>{`${category} - ${productType}`}</Text>
+        <Text bodySmall>{`${category || DEFAULT_TEXT} - ${
+          productType || DEFAULT_TEXT
+        }`}</Text>
       </View>
     </View>
   );
 
   const title = (
     <View paddingV-5>
-      <Text h2 style={styles.bold}>
+      <Text h2 style={styles.bold} numberOfLines={1}>
         {name}
       </Text>
     </View>
   );
 
   return (
-    <Card style={styles.card} {...props}>
+    <Card containerStyle={styles.card} {...props}>
       <CardImageBlock />
       <View style={styles.cardBody}>
         {title}
@@ -157,6 +167,7 @@ export default ({
 
 const styles = StyleSheet.create({
   cardBody: {
+    width: getWidth(282),
     padding: spacing(2.5),
     backgroundColor: colors.gray,
     borderBottomLeftRadius: BORDER_RADIUS,
@@ -177,6 +188,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing(4),
   },
   card: {
+    justifyContent: 'space-between',
     backgroundColor: colors.gray,
     borderRadius: BORDER_RADIUS,
   },
@@ -191,6 +203,7 @@ const styles = StyleSheet.create({
     ...genBoxShadow(1),
   },
   cardImage: {
+    width: '100%',
     height: getHeight(200),
     zIndex: -1,
     borderTopEndRadius: BORDER_RADIUS,
@@ -198,7 +211,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.gray,
   },
   button: {borderWidth: 1, borderColor: colors.darkGray, width: getWidth(120)},
-  categoryBlock: {justifyContent: 'space-between', paddingBottom: spacing(1)},
+  categoryBlock: {
+    justifyContent: 'space-between',
+    paddingBottom: spacing(1),
+    minWidth: getWidth(88),
+  },
   buttonBlock: {
     width: getWidth(250),
     justifyContent: 'space-between',

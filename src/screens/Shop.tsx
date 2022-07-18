@@ -6,8 +6,11 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {Header, ShoppingCard} from 'components';
 import colors from 'utils/colors';
 import {spacing} from 'utils/configScreen';
+import useProduct from 'hooks/useProduct';
 
 export default () => {
+  const {data} = useProduct();
+
   const onScroll = e => {
     console.log({e: e.nativeEvent.contentOffset.y});
   };
@@ -16,56 +19,16 @@ export default () => {
     <SafeAreaView style={styles.container} edges={['left', 'right']}>
       <Header.ShopHeader
         id="d50aeb3c"
-        image_link="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png"
+        imageLink="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png"
       />
       <ScrollView
         contentContainerStyle={styles.body}
         showsVerticalScrollIndicator={false}
         onScroll={onScroll}>
-        <ShoppingCard
-          style={styles.card}
-          name="Super Luscious Mascara"
-          tagList={['Dasda']}
-          category="adsasd"
-          price="dasds"
-          image_link="https://media.istockphoto.com/photos/beauty-brushes-picture-id1161219638?k=20&m=1161219638&s=612x612&w=0&h=Nvf5VQIsLAXxE-6yz3R5t43rXei2xXPkkDATCyQxicI="
-          productType="dasdas"
-          rating="4.5"
-          brand="abc"
-        />
-        <ShoppingCard
-          style={styles.card}
-          name="Super Luscious Mascara"
-          tagList={['Dasda']}
-          category="adsasd"
-          price="dasds"
-          image_link="https://media.istockphoto.com/photos/beauty-brushes-picture-id1161219638?k=20&m=1161219638&s=612x612&w=0&h=Nvf5VQIsLAXxE-6yz3R5t43rXei2xXPkkDATCyQxicI="
-          productType="dasdas"
-          rating="4.5"
-          brand="abc"
-        />
-        <ShoppingCard
-          style={styles.card}
-          name="Super Luscious Mascara"
-          tagList={['Dasda']}
-          category="adsasd"
-          price="dasds"
-          image_link="https://media.istockphoto.com/photos/beauty-brushes-picture-id1161219638?k=20&m=1161219638&s=612x612&w=0&h=Nvf5VQIsLAXxE-6yz3R5t43rXei2xXPkkDATCyQxicI="
-          productType="dasdas"
-          rating="4.5"
-          brand="abc"
-        />
-        <ShoppingCard
-          style={styles.card}
-          name="Super Luscious Mascara"
-          tagList={['Dasda']}
-          category="adsasd"
-          price="dasds"
-          image_link="https://media.istockphoto.com/photos/beauty-brushes-picture-id1161219638?k=20&m=1161219638&s=612x612&w=0&h=Nvf5VQIsLAXxE-6yz3R5t43rXei2xXPkkDATCyQxicI="
-          productType="dasdas"
-          rating="4.5"
-          brand="abc"
-        />
+        {data &&
+          data.products.map((product, index) => (
+            <ShoppingCard key={index} style={styles.card} {...product} />
+          ))}
       </ScrollView>
     </SafeAreaView>
   );
