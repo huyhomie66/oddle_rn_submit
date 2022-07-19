@@ -1,12 +1,17 @@
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ScrollView, StyleSheet} from 'react-native';
-import Header from 'components/Header';
-import {ShoppingCard} from 'components';
+
+import {ShoppingCard, Header} from 'components';
+import {ShoppingCardProp} from 'components/ShoppingCard';
+
 import {spacing} from 'utils/configScreen';
 import colors from 'utils/colors';
+import useProduct from 'hooks/useProduct';
 
 export default () => {
+  const {data, refetch} = useProduct();
+
   return (
     <SafeAreaView style={styles.container} edges={['left', 'right']}>
       <Header.FavoriteHeader
@@ -16,28 +21,17 @@ export default () => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.body}>
-        <ShoppingCard
-          style={styles.card}
-          name="Super Luscious Mascara"
-          tagList={['Dasda']}
-          category="adsasd"
-          price="dasds"
-          imageLink="https://media.istockphoto.com/photos/beauty-brushes-picture-id1161219638?k=20&m=1161219638&s=612x612&w=0&h=Nvf5VQIsLAXxE-6yz3R5t43rXei2xXPkkDATCyQxicI="
-          productType="dasdas"
-          rating="4.5"
-          brand="abc"
-        />
-        <ShoppingCard
-          style={styles.card}
-          name="Super Luscious Mascara"
-          tagList={['Dasda']}
-          category="adsasd"
-          price="dasds"
-          imageLink="https://media.istockphoto.com/photos/beauty-brushes-picture-id1161219638?k=20&m=1161219638&s=612x612&w=0&h=Nvf5VQIsLAXxE-6yz3R5t43rXei2xXPkkDATCyQxicI="
-          productType="dasdas"
-          rating="4.5"
-          brand="abc"
-        />
+        {data &&
+          data
+            .filter((e: ShoppingCardProp) => !!e.isLiked)
+            .map((product: ShoppingCardProp, index: number) => (
+              <ShoppingCard
+                key={index}
+                style={styles.card}
+                onLikeItem={refetch}
+                {...product}
+              />
+            ))}
       </ScrollView>
     </SafeAreaView>
   );

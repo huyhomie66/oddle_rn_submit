@@ -1,5 +1,6 @@
 import {GraphQLClient, gql} from 'graphql-request';
 import {ENDPOINT, TOKEN} from 'config';
+import {getListItem} from 'service/endpoint';
 
 const client = new GraphQLClient(ENDPOINT, {
   headers: {
@@ -26,6 +27,17 @@ const query = gql`
   }
 `;
 
-const getProducts = async () => await client.request(query);
+const getProducts = async () => {
+  const listLikedItems = await getListItem();
+
+  const result = await client.request(query);
+  const finalProduct = result.products.map(product => ({
+    ...product,
+    isLiked: listLikedItems.includes(product.id),
+  }));
+
+  console.log(finalProduct);
+  return finalProduct;
+};
 export {getProducts};
 export default client;

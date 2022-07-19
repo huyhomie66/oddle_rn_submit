@@ -25,7 +25,7 @@ const TabBottom = ({tabs}: {tabs: ITab[]}) => {
 
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="Shop"
       screenOptions={{headerShown: false}}
       tabBar={props => <TabBottomComponent {...props} />}>
       {tabs.map((e, i) => (

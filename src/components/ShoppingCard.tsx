@@ -5,8 +5,9 @@ import {Card, Text, View, Icon, Image, CardProps} from 'react-native-ui-lib';
 import Button from 'components/Button';
 import colors, {genBoxShadow} from 'utils/colors';
 import {getHeight, getWidth, spacing} from 'utils/configScreen';
+import {likeAnItem, unlikeAnItem} from 'service/endpoint';
 
-export interface ShoppingCardProps extends CardProps {
+export interface ShoppingCardProp extends CardProps {
   imageLink: string;
   brand: string;
   tagList: string[];
@@ -15,6 +16,9 @@ export interface ShoppingCardProps extends CardProps {
   name: string;
   category: string;
   productType: string;
+  id: string;
+  isLiked: boolean;
+  onLikeItem: () => void;
 }
 
 type CategoryData = {
@@ -51,8 +55,11 @@ export default ({
   category,
   productType,
   brand,
+  id,
+  isLiked,
+  onLikeItem = () => {},
   ...props
-}: ShoppingCardProps) => {
+}: ShoppingCardProp) => {
   const categoryData: CategoryData[] = [
     {
       icon: 'star',
@@ -75,9 +82,19 @@ export default ({
   );
 
   const CardImageBlock = () => {
-    const [isLiked, setLiked] = React.useState(false);
+    const [isLikedItem, setLikedItem] = React.useState(isLiked);
 
-    const onPress = () => setLiked(!isLiked);
+    const onPress = async () => {
+      const newLiked = !isLikedItem;
+      setLikedItem(newLiked);
+
+      if (newLiked === true) {
+        await likeAnItem(id);
+      } else {
+        await unlikeAnItem(id);
+      }
+      onLikeItem();
+    };
 
     const cardHeaderProps = {
       between: true,
@@ -93,7 +110,7 @@ export default ({
         <Pressable style={styles.favoriteButton} onPress={onPress}>
           <Icon
             assetGroup="icons"
-            assetName={isLiked ? 'favorite-selected' : 'favorite'}
+            assetName={isLikedItem ? 'favorite-selected' : 'favorite'}
             size={12}
             style={{
               padding: 10,
