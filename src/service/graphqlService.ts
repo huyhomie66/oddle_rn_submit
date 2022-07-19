@@ -22,6 +22,7 @@ const query = gql`
       rating
       tagList
       imageLink
+      websiteLink
       brand
     }
   }

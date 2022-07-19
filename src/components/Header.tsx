@@ -13,6 +13,17 @@ interface IHeader extends ViewProps {
 const HomeHeader = ({id = '', imageLink}: IHeader) => {
   const insets = useSafeAreaInsets();
 
+  const genTitle = () => {
+    const d = new Date(Date.now());
+    const hour = d.getHours();
+    if (hour < 12 && hour > 3) {
+      return 'Good morning';
+    } else if (hour > 12 && hour < 15) {
+      return 'Good afternoon';
+    } else if (hour > 15) {
+      return 'Good evening';
+    }
+  };
   const viewProps = {
     row: true,
     centerV: true,
@@ -26,7 +37,7 @@ const HomeHeader = ({id = '', imageLink}: IHeader) => {
     <View {...viewProps}>
       <Image source={{uri: imageLink}} style={styles.image} />
       <View>
-        <Text bodySmall>Good morning!</Text>
+        <Text bodySmall>{genTitle()}!</Text>
         <Text h3Bold>{id}</Text>
       </View>
     </View>

@@ -11,7 +11,7 @@ import {APP_ACCOUNT_NAME} from 'config';
 import {ShoppingCardProp} from 'components/ShoppingCard';
 
 export default () => {
-  const {data, refetch} = useProduct();
+  const {data} = useProduct();
 
   const onScroll = e => {
     console.log({e: e.nativeEvent.contentOffset.y});

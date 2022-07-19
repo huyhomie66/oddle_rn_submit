@@ -1,5 +1,5 @@
 import React from 'react';
-import {Pressable, StyleSheet} from 'react-native';
+import {Linking, Pressable, StyleSheet} from 'react-native';
 import {Card, Text, View, Icon, Image, CardProps} from 'react-native-ui-lib';
 
 import Button from 'components/Button';
@@ -18,6 +18,8 @@ export interface ShoppingCardProp extends CardProps {
   productType: string;
   id: string;
   isLiked: boolean;
+  websiteLink: string;
+  productLink: string;
   onLikeItem: () => void;
 }
 
@@ -47,6 +49,8 @@ const RatingBlock = ({data}: {data: CategoryData[]}) => {
 };
 
 export default ({
+  productLink,
+  websiteLink,
   imageLink = '',
   name,
   price,
@@ -132,22 +136,32 @@ export default ({
     );
   };
 
-  const buttonBlock = (
-    <View row style={styles.buttonBlock}>
-      <Button
-        label="View brand"
-        backgroundColor={colors.white}
-        labelStyle={{color: colors.black}}
-        style={styles.button}
-      />
-      <Button
-        label="Order now"
-        style={styles.button}
-        labelStyle={styles.bold}
-        backgroundColor={colors.primary}
-      />
-    </View>
-  );
+  const ButtonBlock = () => {
+    const onViewBrand = () => {
+      Linking.openURL(websiteLink);
+    };
+    const onOrderNow = () => {
+      Linking.openURL(productLink);
+    };
+    return (
+      <View row style={styles.buttonBlock}>
+        <Button
+          label="View brand"
+          backgroundColor={colors.white}
+          labelStyle={{color: colors.black}}
+          style={styles.button}
+          onPress={onViewBrand}
+        />
+        <Button
+          label="Order now"
+          style={styles.button}
+          labelStyle={styles.bold}
+          backgroundColor={colors.primary}
+          onPress={onOrderNow}
+        />
+      </View>
+    );
+  };
 
   const categoryBlock = (
     <View row style={styles.categoryBlock}>
@@ -176,7 +190,7 @@ export default ({
         {tagListBlock}
         <RatingBlock data={categoryData} />
         {categoryBlock}
-        {buttonBlock}
+        <ButtonBlock />
       </View>
     </Card>
   );

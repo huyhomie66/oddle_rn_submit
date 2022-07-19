@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {ScrollView, StyleSheet} from 'react-native';
 import {View, Text} from 'react-native-ui-lib';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -12,8 +12,36 @@ import {spacing} from 'utils/configScreen';
 import colors from 'utils/colors';
 import {APP_ACCOUNT_NAME} from 'config';
 
+const useProductFormatData = (data: ShoppingCardProp[]) => {
+  const likedItems: any[] = useMemo(
+    () => (data ? data.filter((e: ShoppingCardProp) => !!e.isLiked) : []),
+    [data],
+  );
+
+  const likedNames = useMemo(
+    () => (likedItems ? likedItems.map((e: ShoppingCardProp) => e.name) : []),
+    [data],
+  );
+
+  const likedBrands = useMemo(
+    () => (likedItems ? likedItems.map((e: ShoppingCardProp) => e.brand) : []),
+    [data],
+  );
+
+  const recommendedList = useMemo(
+    () =>
+      data
+        ? data.filter((e: ShoppingCardProp) => likedBrands.includes(e.brand))
+        : [],
+    [data],
+  );
+  return {likedItems, likedNames, recommendedList};
+};
+
 export default () => {
-  const {data, refetch} = useProduct();
+  const {data, isLoading} = useProduct();
+
+  const {likedNames, recommendedList} = useProductFormatData(data);
 
   return (
     <SafeAreaView style={styles.container} edges={['left', 'right']}>
@@ -26,34 +54,31 @@ export default () => {
           Recommended for you
         </Text>
       </View>
-      <ScrollView
-        contentContainerStyle={styles.body}
-        showsVerticalScrollIndicator={false}>
-        <HorizontalScroll style={styles.horizontalScroll}>
-          {data &&
-            data.map((product: ShoppingCardProp, index: number) => (
-              <ShoppingCard key={index} style={styles.card} {...product} />
-            ))}
-        </HorizontalScroll>
+      {isLoading && <Text>Loading</Text>}
+      {!isLoading && (
+        <ScrollView
+          contentContainerStyle={styles.body}
+          showsVerticalScrollIndicator={false}>
+          <HorizontalScroll style={styles.horizontalScroll}>
+            {data &&
+              data.map((product: ShoppingCardProp, index: number) => (
+                <ShoppingCard key={index} style={styles.card} {...product} />
+              ))}
+          </HorizontalScroll>
 
-        <Text h1 style={{paddingLeft: spacing(4)}}>
-          Because you like Nyx
-        </Text>
-        <HorizontalScroll style={styles.horizontalScroll}>
-          {/* <ShoppingCard
-            style={styles.card}
-            id="dasd"
-            name="Super Luscious Mascara"
-            tagList={['Dasda']}
-            category="adsasd"
-            price="dasds"
-            imageLink="https://media.istockphoto.com/photos/beauty-brushes-picture-id1161219638?k=20&m=1161219638&s=612x612&w=0&h=Nvf5VQIsLAXxE-6yz3R5t43rXei2xXPkkDATCyQxicI="
-            productType="dasdas"
-            rating="4.5"
-            brand="abc"
-          /> */}
-        </HorizontalScroll>
-      </ScrollView>
+          <Text h3Bold style={{paddingLeft: spacing(4)}}>
+            Because you like: {likedNames.toString()}
+          </Text>
+          <HorizontalScroll style={styles.horizontalScroll}>
+            {recommendedList &&
+              recommendedList.map(
+                (product: ShoppingCardProp, index: number) => (
+                  <ShoppingCard key={index} style={styles.card} {...product} />
+                ),
+              )}
+          </HorizontalScroll>
+        </ScrollView>
+      )}
     </SafeAreaView>
   );
 };
