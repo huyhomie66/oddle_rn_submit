@@ -1,11 +1,11 @@
 import {TabBottom} from 'app/NavigationComponent';
-
-import {Home, Shop, Favorites} from 'screens/index';
+import React from 'react';
+import {Home, Shop, Favorite} from 'screens/index';
 
 const tabs = [
   {name: 'Home', component: Home},
   {name: 'Shop', component: Shop},
-  {name: 'Favorites', component: Favorites},
+  {name: 'Favorite', component: Favorite},
 ];
 
 const MainBottomTab = () => <TabBottom tabs={tabs} />;

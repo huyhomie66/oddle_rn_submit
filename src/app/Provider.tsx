@@ -1,5 +1,6 @@
 import React from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -10,7 +11,9 @@ const queryClient = new QueryClient({
 });
 
 const Provider = ({children}) => (
-  <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  <SafeAreaProvider>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  </SafeAreaProvider>
 );
 
 export default Provider;

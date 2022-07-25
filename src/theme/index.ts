@@ -1,11 +1,19 @@
-import { Assets, Colors, Typography, Spacings, Incubator, ViewProps } from 'react-native-ui-lib'; // eslint-disable-line
-import { ThemeManager } from 'react-native-ui-lib';
-import { Dimensions } from 'react-native';
+import {
+  Assets,
+  Colors,
+  Typography,
+  Spacings,
+  Incubator,
+  ViewProps,
+  View,
+} from 'react-native-ui-lib'; // eslint-disable-line
+import {ThemeManager} from 'react-native-ui-lib';
+import {Dimensions} from 'react-native';
 import colors from 'utils/colors';
 
-export const { width, height } = Dimensions.get('window');
+export const {width, height} = Dimensions.get('window');
 
-const getJustify = (props) => {
+const getJustify = props => {
   if (props.around) {
     return 'space-around';
   } else if (props.between) {
@@ -13,16 +21,25 @@ const getJustify = (props) => {
   }
 };
 
+const globalTag = {
+  h1: {fontSize: 26, lineHeight: 34, fontWeight: '700'},
+  h2: {fontSize: 24, lineHeight: 32},
+  h3: {fontSize: 20, lineHeight: 26},
+  h3Bold: {fontSize: 20, lineHeight: 26, fontWeight: '700'},
+  h4: {fontSize: 18, lineHeight: 24},
+  body: {fontSize: 16, lineHeight: 20},
+  bodySmall: {fontSize: 14, lineHeight: 20},
+};
 interface IView extends ViewProps {
   around: boolean;
   between: boolean;
 }
 
-const loadDemoConfigurations = () => {
-  ThemeManager.setComponentTheme('Text', (props) => {
+const loadTheme = () => {
+  ThemeManager.setComponentTheme('Text', props => {
     return {
       color: colors.main,
-      fontWeight: props.bold && 'bold',
+      fontWeight: props.bold ? 'bold' : '400',
     };
   });
 
@@ -39,42 +56,22 @@ const loadDemoConfigurations = () => {
   });
 
   Assets.loadAssetsGroup('icons', {
-    'arrow-right': require('../assets/arrow-right.png'),
-    eye: require('../assets/eye.png'),
-    'eye-slash': require('../assets/eye-slash.png'),
-    maximize: require('../assets/maximize.png'),
-    closeSquare: require('../assets/close-square.png'),
-    clock: require('../assets/clock.png'),
-    close: require('../assets/close.png'),
-    logout: require('../assets/logout.png'),
-    share: require('../assets/share.png'),
-    trending: require('../assets/trending.png'),
-    bestValue: require('../assets/best-value.png'),
-    camera: require('../assets/camera.png'),
+    home: require('../assets/home.png'),
+    'home-selected': require('../assets/home-selected.png'),
+    shop: require('../assets/shop.png'),
+    'shop-selected': require('../assets/shop-selected.png'),
+    favorite: require('../assets/favorite.png'),
+    'favorite-selected': require('../assets/favorite-selected.png'),
     info: require('../assets/info.png'),
-    lock: require('../assets/lock.png'),
-    network: require('../assets/network.png'),
-    ring: require('../assets/ring.png'),
-    user: require('../assets/user.png'),
+    money: require('../assets/money.png'),
+    star: require('../assets/star.png'),
   });
 
-  Assets.loadAssetsGroup('images', {
-    user: require('../assets/user-default.png'),
-    'price-list': require('../assets/price-list.png'),
-    'coin-intro': require('../assets/coin-intro.png'),
-    noResultSearch: require('../assets/no-result-search.png'),
-    noNewNotification: require('../assets/no-new-notification.png'),
-  });
+  Assets.loadAssetsGroup('images', {});
 
   Assets.loadAssetsGroup('svg', {});
 
-  Typography.loadTypographies({
-    h1: { ...Typography.text40 },
-    h2: { ...Typography.text50 },
-    h3: { ...Typography.text70M },
-    body: Typography.text70,
-    bodySmall: Typography.text80,
-  });
+  Typography.loadTypographies(globalTag);
 
   Spacings.loadSpacings({
     s12: Spacings.s10 + Spacings.s2,
@@ -90,11 +87,6 @@ const loadDemoConfigurations = () => {
       mountainBackground: Colors.green50,
     },
     dark: {
-      // screenBG: Colors.grey10,
-      // textColor: Colors.white,
-      // moonOrSun: Colors.grey80,
-      // mountainForeground: Colors.violet10,
-      // mountainBackground: Colors.violet20,
       screenBG: Colors.white,
       textColor: Colors.grey10,
       moonOrSun: Colors.yellow30,
@@ -106,7 +98,10 @@ const loadDemoConfigurations = () => {
   Colors.loadColors(colors);
 
   /* Components */
-  Incubator.TextField.defaultProps = { ...Incubator.TextField.defaultProps, preset: 'default' };
+  Incubator.TextField.defaultProps = {
+    ...Incubator.TextField.defaultProps,
+    preset: 'default',
+  };
 };
 
-export default loadDemoConfigurations;
+export default loadTheme;
